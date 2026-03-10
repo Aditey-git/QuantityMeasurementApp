@@ -22,5 +22,18 @@ namespace QuantityAppService{
 
             return first.Equals(second);
         }
+
+        public bool CompareFeetAndInch(Feet feet, Inch inch)
+        {
+            if (feet == null)
+                throw new ArgumentNullException(nameof(feet));
+
+            if (inch == null)
+                throw new ArgumentNullException(nameof(inch));
+
+            double feetInInches = feet.Value * 12;
+
+            return feetInInches.CompareTo(inch.Value) == 0;
+        }
     }
 }

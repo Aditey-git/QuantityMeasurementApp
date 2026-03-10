@@ -1,15 +1,9 @@
 ﻿using System;
-using QuantityAppModel;
-using QuantityAppService;
 
-
-namespace QuantityAppMain{
-    class Program
+class Program
+{
+    public static void Main (string[] args)
     {
-        public static void Main(string[] args)
-        {
-            Menu menu = new Menu();
-            menu.Run();
-        }
+        Console.WriteLine("Welcome to Quantity Measurement App.");
     }
 }

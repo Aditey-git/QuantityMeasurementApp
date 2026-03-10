@@ -1,5 +1,7 @@
 ﻿﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuantityAppModel;
+using QuantityAppService;
+using System;
 
 namespace QuantityAppTesting
 {
@@ -57,6 +59,47 @@ namespace QuantityAppTesting
 
             Assert.AreNotEqual(first.GetHashCode(), second.GetHashCode());
         }
+
+        [TestMethod]
+        public void GivenOneFeetAndTwelveInch_ShouldReturnTrue()
+        {
+            Feet feet = new Feet(1);
+            Inch inch = new Inch(12);
+
+            QuantityMeasurementService service = new QuantityMeasurementService();
+
+            bool result = service.CompareFeetAndInch(feet, inch);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GivenTwoFeetAndTwentyFourInch_ShouldReturnTrue()
+        {
+            Feet feet = new Feet(2);
+            Inch inch = new Inch(24);
+
+            QuantityMeasurementService service = new QuantityMeasurementService();
+
+            bool result = service.CompareFeetAndInch(feet, inch);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GivenOneFeetAndTenInch_ShouldReturnFalse()
+        {
+            Feet feet = new Feet(1);
+            Inch inch = new Inch(10);
+
+            QuantityMeasurementService service = new QuantityMeasurementService();
+
+            bool result = service.CompareFeetAndInch(feet, inch);
+
+            Assert.IsFalse(result);
+        }
+
         
+                
     }
 }

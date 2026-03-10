@@ -3,10 +3,10 @@ using System;
 namespace QuantityAppModel{
     public class Feet
     {
-        private readonly double val;
+        public double Value{get; set; }
         public Feet(double val)
         {
-            this.val = val;
+            this.Value = val;
         }
 
         public override bool Equals(object? obj)
@@ -30,7 +30,7 @@ namespace QuantityAppModel{
 
             Feet other = (Feet) obj;
 
-            if(this.val.CompareTo(other.val) != 0)
+            if(this.Value.CompareTo(other.Value) != 0)
             {
                 return false;
             }
@@ -40,7 +40,7 @@ namespace QuantityAppModel{
 
         public override int GetHashCode()
         {
-            return val.GetHashCode();
+            return Value.GetHashCode();
         }
     }
 }
