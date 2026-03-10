@@ -6,140 +6,45 @@ using System;
 namespace QuantityAppTesting
 {
     [TestClass]
-    public class FeetTests
+    public class LengthTests
     {
-        [TestMethod]
-        public void GivenSameFeetValues_ShouldReturnTrue()
-        {
-            Feet first = new Feet(5.0);
-            Feet second = new Feet(5.0);
+        private readonly QuantityMeasurementService service =
+            new QuantityMeasurementService();
 
-            Assert.IsTrue(first.Equals(second));
+        [TestMethod]
+        public void OneYard_Equals_ThreeFeet()
+        {
+            var yard = new QuantityLength(1, LengthUnit.Yard);
+            var feet = new QuantityLength(3, LengthUnit.Feet);
+
+            Assert.IsTrue(service.CompareLength(yard, feet));
         }
 
         [TestMethod]
-        public void GivenDifferentFeetValues_ShouldReturnFalse()
+        public void OneYard_Equals_ThirtySixInches()
         {
-            Feet first = new Feet(5.0);
-            Feet second = new Feet(6.0);
+            var yard = new QuantityLength(1, LengthUnit.Yard);
+            var inch = new QuantityLength(36, LengthUnit.Inch);
 
-            Assert.IsFalse(first.Equals(second));
+            Assert.IsTrue(service.CompareLength(yard, inch));
         }
 
         [TestMethod]
-        public void GivenNullComparison_ShouldReturnFalse()
+        public void TwoPointFiveFourCm_Equals_OneInch()
         {
-            Feet first = new Feet(5.0);
+            var cm = new QuantityLength(2.54, LengthUnit.Centimeters);
+            var inch = new QuantityLength(1, LengthUnit.Inch);
 
-            Assert.IsFalse(first.Equals(null));
+            Assert.IsTrue(service.CompareLength(cm, inch));
         }
 
         [TestMethod]
-        public void GivenSameReference_ShouldReturnTrue()
+        public void DifferentValues_ReturnFalse()
         {
-            Feet first = new Feet(5.0);
+            var yard = new QuantityLength(1, LengthUnit.Yard);
+            var feet = new QuantityLength(2, LengthUnit.Feet);
 
-            Assert.IsTrue(first.Equals(first));
+            Assert.IsFalse(service.CompareLength(yard, feet));
         }
-
-        [TestMethod]
-        public void GivenFeetObjectsWithSameValue_ShouldHaveSameHashCode()
-        {
-            Feet first = new Feet(5.0);
-            Feet second = new Feet(5.0);
-
-            Assert.AreEqual(first.GetHashCode(), second.GetHashCode());
-        }
-
-        [TestMethod]
-        public void GivenFeetObjectsWithDifferentValues_ShouldHaveDifferentHashCode()
-        {
-            Feet first = new Feet(5.0);
-            Feet second = new Feet(6.0);
-
-            Assert.AreNotEqual(first.GetHashCode(), second.GetHashCode());
-        }
-
-        [TestMethod]
-        public void GivenOneFeetAndTwelveInch_ShouldReturnTrue()
-        {
-            Feet feet = new Feet(1);
-            Inch inch = new Inch(12);
-
-            QuantityMeasurementService service = new QuantityMeasurementService();
-
-            bool result = service.CompareFeetAndInch(feet, inch);
-
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GivenTwoFeetAndTwentyFourInch_ShouldReturnTrue()
-        {
-            Feet feet = new Feet(2);
-            Inch inch = new Inch(24);
-
-            QuantityMeasurementService service = new QuantityMeasurementService();
-
-            bool result = service.CompareFeetAndInch(feet, inch);
-
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GivenOneFeetAndTenInch_ShouldReturnFalse()
-        {
-            Feet feet = new Feet(1);
-            Inch inch = new Inch(10);
-
-            QuantityMeasurementService service = new QuantityMeasurementService();
-
-            bool result = service.CompareFeetAndInch(feet, inch);
-
-            Assert.IsFalse(result);
-        }
-
-        [TestMethod]
-        public void GivenThreeFeetAndOneYard_ShouldReturnTrue()
-        {
-            Feet feet = new Feet(3);
-            Yard yard = new Yard(1);
-
-            QuantityMeasurementService service = new QuantityMeasurementService();
-
-            bool result = service.CompareFeetAndYard(feet, yard);
-
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GivenSixFeetAndTwoYard_ShouldReturnTrue()
-        {
-            Feet feet = new Feet(6);
-            Yard yard = new Yard(2);
-
-            QuantityMeasurementService service = new QuantityMeasurementService();
-
-            bool result = service.CompareFeetAndYard(feet, yard);
-
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GivenThreeFeetAndTwoYard_ShouldReturnFalse()
-        {
-            Feet feet = new Feet(3);
-            Yard yard = new Yard(2);
-
-            QuantityMeasurementService service = new QuantityMeasurementService();
-
-            bool result = service.CompareFeetAndYard(feet, yard);
-
-            Assert.IsFalse(result);
-        }
-
-
-        
-                
     }
 }
