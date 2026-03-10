@@ -99,6 +99,46 @@ namespace QuantityAppTesting
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void GivenThreeFeetAndOneYard_ShouldReturnTrue()
+        {
+            Feet feet = new Feet(3);
+            Yard yard = new Yard(1);
+
+            QuantityMeasurementService service = new QuantityMeasurementService();
+
+            bool result = service.CompareFeetAndYard(feet, yard);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GivenSixFeetAndTwoYard_ShouldReturnTrue()
+        {
+            Feet feet = new Feet(6);
+            Yard yard = new Yard(2);
+
+            QuantityMeasurementService service = new QuantityMeasurementService();
+
+            bool result = service.CompareFeetAndYard(feet, yard);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GivenThreeFeetAndTwoYard_ShouldReturnFalse()
+        {
+            Feet feet = new Feet(3);
+            Yard yard = new Yard(2);
+
+            QuantityMeasurementService service = new QuantityMeasurementService();
+
+            bool result = service.CompareFeetAndYard(feet, yard);
+
+            Assert.IsFalse(result);
+        }
+
+
         
                 
     }

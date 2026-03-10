@@ -35,5 +35,20 @@ namespace QuantityAppService{
 
             return feetInInches.CompareTo(inch.Value) == 0;
         }
+
+
+
+        public bool CompareFeetAndYard(Feet feet, Yard yard)
+        {
+            if (feet == null)
+                throw new ArgumentNullException(nameof(feet));
+
+            if (yard == null)
+                throw new ArgumentNullException(nameof(yard));
+
+            double yardInFeet = yard.Value * 3;
+
+            return feet.Value.CompareTo(yardInFeet) == 0;
+        }
     }
 }
