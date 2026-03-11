@@ -1,21 +1,18 @@
-using System;
+namespace QuantityAppModel
+{
+    // Supported length units with conversion factor relative to base unit.
 
-    namespace QuantityAppModel
+    public enum LengthUnit
     {
-        // Supported length units with conversion factor relative to base unit (Feet)
-        public enum LengthUnit
-        {
-            Feet,
-            Inch,
-            Yard,
-            Centimeters
-        }
+        Feet,
+        Inch,
+        Yard,
+        Centimeters
+    }
 
-
-
-         public static class LengthUnitExtensions
+    public static class LengthUnitExtensions
     {
-        public static double ToBaseUnit(this LengthUnit unit, double value)
+        public static double ConvertToBaseUnit(this LengthUnit unit, double value)
         {
             return unit switch
             {
@@ -23,11 +20,11 @@ using System;
                 LengthUnit.Inch => value / 12.0,
                 LengthUnit.Yard => value * 3.0,
                 LengthUnit.Centimeters => value / 30.48,
-                _ => throw new ArgumentException("Unsupported unit.")
+                _ => throw new ArgumentException("Unsupported unit")
             };
         }
 
-        public static double FromBaseUnit(this LengthUnit unit, double baseValue)
+        public static double ConvertFromBaseUnit(this LengthUnit unit, double baseValue)
         {
             return unit switch
             {
@@ -35,8 +32,8 @@ using System;
                 LengthUnit.Inch => baseValue * 12.0,
                 LengthUnit.Yard => baseValue / 3.0,
                 LengthUnit.Centimeters => baseValue * 30.48,
-                _ => throw new ArgumentException("Unsupported unit.")
+                _ => throw new ArgumentException("Unsupported unit")
             };
         }
     }
-    }
+}

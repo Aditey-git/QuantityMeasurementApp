@@ -23,10 +23,11 @@ namespace QuantityAppModel
         // Convert current value to base unit
         private double ConvertToBase()
         {
-            return ((object)Unit) switch
+            return Unit switch
             {
-                LengthUnit l => l.ToBaseUnit(Value),
-                WeightUnit w => w.ToBaseUnit(Value),
+                LengthUnit l => l.ConvertToBaseUnit(Value),
+                WeightUnit w => w.ConvertToBaseUnit(Value),
+                VolumeUnit v => v.ConvertToBaseUnit(Value),
                 _ => throw new InvalidOperationException("Unsupported category")
             };
         }
@@ -36,10 +37,11 @@ namespace QuantityAppModel
         {
             double baseValue = ConvertToBase();
 
-            double converted = ((object)targetUnit) switch
+            double converted = targetUnit switch
             {
-                LengthUnit l => l.FromBaseUnit(baseValue),
-                WeightUnit w => w.FromBaseUnit(baseValue),
+                LengthUnit l => l.ConvertFromBaseUnit(baseValue),
+                WeightUnit w => w.ConvertFromBaseUnit(baseValue),
+                VolumeUnit v => v.ConvertFromBaseUnit(baseValue),
                 _ => throw new InvalidOperationException("Unsupported category")
             };
 
@@ -52,13 +54,13 @@ namespace QuantityAppModel
             if (other is null)
                 throw new ArgumentNullException(nameof(other));
 
-            double sumBase =
-                ConvertToBase() + other.ConvertToBase();
+            double sumBase = ConvertToBase() + other.ConvertToBase();
 
-            double result = ((object)Unit) switch
+            double result = Unit switch
             {
-                LengthUnit l => l.FromBaseUnit(sumBase),
-                WeightUnit w => w.FromBaseUnit(sumBase),
+                LengthUnit l => l.ConvertFromBaseUnit(sumBase),
+                WeightUnit w => w.ConvertFromBaseUnit(sumBase),
+                VolumeUnit v => v.ConvertFromBaseUnit(sumBase),
                 _ => throw new InvalidOperationException("Unsupported category")
             };
 
