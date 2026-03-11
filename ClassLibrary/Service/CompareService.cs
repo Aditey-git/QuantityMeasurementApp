@@ -1,16 +1,16 @@
 using System;
 using QuantityAppModel;
 
-namespace QuantityAppService{
+namespace QuantityAppService
+{
     public class QuantityMeasurementService
     {
-        public bool CompareLength(QuantityLength first, QuantityLength second)
+        public bool Compare<U>(Quantity<U> first, Quantity<U> second) where U : struct, Enum
         {
             if (first == null || second == null)
-                throw new ArgumentNullException("Length cannot be null");
+                throw new ArgumentNullException("Quantity cannot be null");
 
             return first.Equals(second);
         }
-
     }
 }
