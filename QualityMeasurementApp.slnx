@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/" />
+  <Project Path="QuantityMeasurementApp.App\QuantityMeasurementApp.App.csproj" Type="Classic C#" />
+  <Project Path="QuantityMeasurementApp.Entity\QuantityMeasurementApp.Entity.csproj" Type="Classic C#" />
+  <Project Path="QuantityMeasurementApp.Repository\QuantityMeasurementApp.Repository.csproj" Type="Classic C#" />
+  <Project Path="QuantityMeasurementApp.Service\QuantityMeasurementApp.Service.csproj" Type="Classic C#" />
+  <Project Path="QuantityMeasurementApp.Tests\QuantityMeasurementApp.Tests.csproj" Type="Classic C#" />
+</Solution>
