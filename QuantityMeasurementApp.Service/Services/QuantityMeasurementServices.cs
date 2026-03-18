@@ -1,11 +1,20 @@
 using System;
 using QuantityAppModel;
+using QuantityAppRepository;
 
 namespace QuantityAppService
 {
     // Orchestrates business logic and routes requests safely
     public class QuantityMeasurementServices : IQuantityMeasurementService
     {
+        private readonly IQuantityMeasurementRepository repository;
+
+        public QuantityMeasurementServices(IQuantityMeasurementRepository repo)
+        {
+            repository = repo;
+        }
+
+
         // Validates floats
         public void ValidateValue(double checkValue)
         {
@@ -29,6 +38,20 @@ namespace QuantityAppService
             }
             catch (Exception ex)
             {
+                var entity = new QuantityMeasurementEntity
+                {
+                    MeasurementCategory = request.MeasurementCategory,
+                    OperationType = request.OperationType.ToString(),
+                    Operand1Value = request.MeasurementValue1,
+                    Operand1Unit = request.MeasurementUnit1,
+                    Operand2Value = request.MeasurementValue2,
+                    Operand2Unit = request.MeasurementUnit2,
+                    ErrorMessage = ex.Message,
+                    CreatedAt = DateTime.Now
+                };
+
+                repository.SaveMeasurement(entity);
+
                 return new MeasurementResponseDTO { IsSuccess = false, ErrorMessage = ex.Message };
             }
         }
@@ -54,6 +77,20 @@ namespace QuantityAppService
 
             if (req.OperationType == MeasurementAction.Compare)
             {
+
+                var entity = new QuantityMeasurementEntity
+                {
+                    MeasurementCategory = req.MeasurementCategory,
+                    OperationType = req.OperationType.ToString(),
+                    Operand1Value = req.MeasurementValue1,
+                    Operand1Unit = req.MeasurementUnit1,
+                    Operand2Value = req.MeasurementValue2,
+                    Operand2Unit = req.MeasurementUnit2,
+                    ResultValue = null,
+                    ResultUnit = null,
+                    CreatedAt = DateTime.Now
+                };
+
                 return new MeasurementResponseDTO
                 {
                     IsSuccess = true,
@@ -80,6 +117,24 @@ namespace QuantityAppService
             };
 
             string symbol = req.OperationType switch { MeasurementAction.Add => "+", MeasurementAction.Subtract => "-", _ => "/" };
+
+            double calculatedValue = result.ConvertTo(targetUnit);
+
+            var entityResult = new QuantityMeasurementEntity
+            {
+                MeasurementCategory = req.MeasurementCategory,
+                OperationType = req.OperationType.ToString(),
+                Operand1Value = req.MeasurementValue1,
+                Operand1Unit = req.MeasurementUnit1,
+                Operand2Value = req.MeasurementValue2,
+                Operand2Unit = req.MeasurementUnit2,
+                ResultValue = calculatedValue,
+                ResultUnit = targetUnit.ToString(),
+                CreatedAt = DateTime.Now
+            };
+
+            repository.SaveMeasurement(entityResult);
+
 
             return new MeasurementResponseDTO
             {

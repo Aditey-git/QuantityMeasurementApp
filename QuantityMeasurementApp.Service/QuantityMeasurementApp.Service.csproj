@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuantityMeasurementApp.Entity\QuantityMeasurementApp.Entity.csproj" />
+    <ProjectReference Include="..\QuantityMeasurementApp.Repository\QuantityMeasurementApp.Repository.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
