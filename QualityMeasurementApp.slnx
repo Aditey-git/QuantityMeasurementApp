@@ -6,3 +6,4 @@
   <Project Path="QuantityMeasurementApp.Service\QuantityMeasurementApp.Service.csproj" Type="Classic C#" />
   <Project Path="QuantityMeasurementApp.Tests\QuantityMeasurementApp.Tests.csproj" Type="Classic C#" />
 </Solution>
+

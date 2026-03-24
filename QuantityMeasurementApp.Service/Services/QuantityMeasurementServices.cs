@@ -144,5 +144,27 @@ namespace QuantityAppService
                 FormattedMessage = $"{req.MeasurementValue1} {u1} {symbol} {req.MeasurementValue2} {u2} = {result.ConvertTo(targetUnit)} {targetUnit}"
             };
         }
+
+
+        public List<QuantityMeasurementEntity> GetAllMeasurements()
+        {
+            return repository.GetAllMeasurements();
+        }
+
+
+        public List<QuantityMeasurementEntity> GetMeasurementsByOperation(string operationType)
+        {
+            return repository.GetMeasurementsByOperation(operationType);
+        }
+
+        public List<QuantityMeasurementEntity> GetMeasurementsByCategory(string category)
+        {
+            return repository.GetMeasurementsByCategory(category);
+        }
+
+        public int GetMeasurementCount()
+        {
+            return repository.GetMeasurementCount();
+        }
     }
 }
