@@ -4,12 +4,15 @@ using QuantityAppModel;
 using QuantityAppRepository;
 using System.Runtime.ExceptionServices;
 using System.IO.Pipelines;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace QuantityMeasurementApi.Controllers
 {
+    
     [ApiController]
     [Route("api/quantities")]
+    [Authorize]
     public class QuantityController : ControllerBase
     {
         private readonly IQuantityMeasurementService service;
